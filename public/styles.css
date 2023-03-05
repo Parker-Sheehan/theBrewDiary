@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: #fdfce8;
+}
+
+/* fae96f */
+/* f6c100 */
+/* c96e11 */
+
+nav{
+    background-color: #fdfce8;
+    width: 100vw;
+    height: 10vh;
+}
+
+main{
+    display: flex;
+    justify-content: space-around;
+    background-color: #fdcf62;
+    width: 100vw;
+    height: 90vh;
+}
+
+.log-in-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #c96e11;
+    height: 60vh;
+    width: 30vw;
+    margin-top: 10vh;
+}
+
+.form-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 30vh;
+    width: 280px;
+}
+
+.log-page-btn{
+    align-self: center;
+    color: #c96e11;
+    background-color: #fae96f;
+    border: 0;
+    padding: 10px;
+}
