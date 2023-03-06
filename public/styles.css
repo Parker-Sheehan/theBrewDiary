@@ -13,19 +13,24 @@ nav{
     background-color: #fdfce8;
     width: 100vw;
     height: 10vh;
+    position: fixed;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-
+body{
+    background-color: #fdcf62;
+}
 main{
+    margin-top: 10vh;
     display: flex;
     justify-content: space-around;
-    background-color: #fdcf62;
-    width: 100vw;
-    height: 90vh;
 }
 
+button{
+    cursor: pointer;
+}
 
 #logo-div{
     flex: 1;
@@ -167,7 +172,7 @@ main{
 }
 
 
-.edit-btn{
+.card-btn{
     margin-right: 15px;
     border: none;
     padding: 5px;
@@ -175,9 +180,8 @@ main{
     color: #fdfce8;
 }
 
-.delete-btn{
-    border: none;
-    padding: 5px;
-    background-color: #c96e11;
-    color: #fdfce8;
+#beer-notes-input{
+    width: 99%;
+    resize: none;
 }
+

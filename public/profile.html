@@ -28,6 +28,40 @@
             <div class="beer-card">
                 <div class="beer-card-top">
                     <div class="beer-name-div">
+                        <h3>Beer Name:</h3>
+                        <select name="beer-name-selector" id="beer-name-selector"></select>
+                    </div>
+                    <div class="beer-rating-div">
+                        <h3>Rating:</h3>
+                        <select name="beer-rating-selector" id="beer-rating-selector">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="beer-card-middle">
+                    <div class="beer-notes">
+                        <div class="beer-notes-header">
+                            <h4>Notes</h4>
+                        </div>
+                        <div class="beer-notes-body">
+                            <textarea  id="beer-notes-input" placeholder="What did you think about this beer"  rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="beer-card-bottom">
+                    <div class="btn-div">
+                        <button class="card-btn" id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beer-card">
+                <div class="beer-card-top">
+                    <div class="beer-name-div">
                         <h3>Beer Name: Lorem</h3>
                     </div>
                     <div class="beer-rating-div">
@@ -55,8 +89,8 @@
                 </div>
                 <div class="beer-card-bottom">
                     <!-- <div class="btn-div"> -->
-                        <button class="edit-btn">Edit</button>
-                        <button class="delete-btn">Delete</button>
+                        <button class="card-btn" onclick="editCard(0)">Edit</button>
+                        <button class="card-btn" onclick="deleteCard(0)">Delete</button>
                     <!-- </div> -->
                 </div>
             </div>
