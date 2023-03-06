@@ -20,8 +20,12 @@ async function scrape(){
             let beer = await beers[i].getText()
 
             if(beer === ''){
+                console.log('yay')
                 break
             }
+
+            console.log(beer)
+            console.log(split)
 
             let volume = split[0].replace("oz", "")
             let abv = split.pop().replace('%', "")
@@ -46,5 +50,3 @@ async function scrape(){
 scrape().then(data => {
     console.log(data)
 })
-
-

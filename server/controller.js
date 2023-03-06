@@ -65,6 +65,7 @@ module.exports = {
             CREATE TABLE list(
                 drink_id serial primary key,
                 name VARCHAR,
+                rating FLOAT,
                 size FLOAT,
                 abv FLOAT,
                 oz_alcohol FLOAT
@@ -73,10 +74,10 @@ module.exports = {
                 let {beer, volume, abv} = data[i]
                 sequelize.query(`
                 INSERT INTO list (name, size, abv, oz_alcohol)
-                    values ('${beer}',${volume},${abv},${volume*(abv/100)});
+                    values ('${beer}', ${volume}, ${abv}, ${volume*(abv/100)});
                     `)
             }
 
         })
-    }
+    },
 }

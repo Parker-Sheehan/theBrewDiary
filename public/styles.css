@@ -185,3 +185,41 @@ button{
     resize: none;
 }
 
+#table-div{
+    margin: 50px;
+    flex: 1;
+}
+
+table{
+    width: 60%;
+    text-align: start;
+    border-collapse: collapse;
+    border-color: #c96e11;
+}
+
+th{
+    text-align: start;
+    background-color: #c96e11;
+    color:#fdfce8;
+}
+
+tr{
+    background-color: #fdfce8;
+    color: #c96e11;
+}
+
+tr:nth-child(even){
+    color: #fdfce8;
+    background-color: #fce9d3;
+}
+
+p{
+    display: flex;
+    color: #fdfce8;
+}
+
+.th-div{
+    display: flex;
+    flex-direction: row;
+    color: #fdfce8;
+}
