@@ -1,7 +1,8 @@
 *{
     margin: 0;
     padding: 0;
-    color: #fdfce8;
+    color: #c96e11;
+
 }
 
 /* fae96f */
@@ -12,6 +13,9 @@ nav{
     background-color: #fdfce8;
     width: 100vw;
     height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 main{
@@ -22,12 +26,27 @@ main{
     height: 90vh;
 }
 
+
+#logo-div{
+    flex: 1;
+    font-size: 2em;
+    /* margin-right: 200px; */
+    margin-left: 50px;
+
+}
+
+#link-div{
+    flex: 2;
+    display: flex;
+    justify-content: space-around;
+}
+
 .log-in-card{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #c96e11;
+    background-color: #fdfce8;
     height: 60vh;
     width: 30vw;
     margin-top: 10vh;
@@ -44,8 +63,121 @@ main{
 
 .log-page-btn{
     align-self: center;
-    color: #c96e11;
-    background-color: #fae96f;
+    color: #fdfce8;
+    background-color: #c96e11;
     border: 0;
     padding: 10px;
+}
+
+#profile-div{
+    width: 100vw;
+    flex: 1;
+}
+
+#welcome-div{
+    margin: 20px;
+    margin-left: 50px;
+}
+
+#create-entry-div{
+    margin-left: 50px;
+    width: 300px;
+    height: 50px;
+    background-color: black;
+}
+
+#create-enetry-btn{
+    width: 300px;
+    height: 50px;
+    font-size: 2em;
+    background-color: #fdfce8;
+}
+
+.beer-card{
+    margin: 50px;
+    height: 35vh;
+    width: 40vw;
+    border: 1px solid #c96e11;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fdfce8;
+
+}
+
+.beer-card-top{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    background-color: #fdfce8;
+    border-bottom: #c96e11 1px solid;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.beer-name-div{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    flex: 1;
+    border-right:#c96e11 1px solid;
+}
+
+.beer-rating-div{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    flex: 1;
+}
+
+.beer-card-middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 6;
+    border-bottom: #c96e11 1px solid;
+    
+}
+
+.beer-notes{
+    height: 20vh;
+    width: 35vw;
+    border: #c96e11 solid 1px;
+    border-radius: 10px;
+    
+}
+
+.beer-notes-header{
+    flex: 1;
+    padding: 5px;
+    border-bottom: #c96e11 solid 1px;
+}
+
+
+.beer-notes-body{
+    flex: 10;
+    padding: 5px;
+}
+
+.beer-card-bottom{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 15px;
+}
+
+
+.edit-btn{
+    margin-right: 15px;
+    border: none;
+    padding: 5px;
+    background-color: #c96e11;
+    color: #fdfce8;
+}
+
+.delete-btn{
+    border: none;
+    padding: 5px;
+    background-color: #c96e11;
+    color: #fdfce8;
 }
