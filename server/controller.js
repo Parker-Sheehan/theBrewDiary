@@ -35,6 +35,17 @@ module.exports = {
         `).then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
+    createPost: (req, res) => {
+        console.log(req.body)
+        let {name, rating, notes, beerId} = req.body
+        console.log(beerId)
+
+        sequelize.query(`
+        INSERT INTO post (beer_Id, name, rating, notes)
+            values (${beerId}, '${name}', ${rating}, '${notes}');
+        `).then(dbRes => {res.status(200).send(dbRes[0])
+        }).catch(err=> console.log(err))
+    },
     seed: (req, res) => {
         let count = 0
         let arr = []
@@ -81,15 +92,26 @@ module.exports = {
         scrape().then(data => {            
             sequelize.query(`
             drop table if exists list;
+            drop table if exists posts;
 
             CREATE TABLE list(
-                drink_id serial primary key,
+                beer_id serial primary key,
                 name VARCHAR,
                 rating FLOAT,
                 size FLOAT,
                 abv FLOAT,
                 oz_alcohol FLOAT
-            );`)
+            );
+
+            CREATE TABLE post(
+                post_id SERIAL PRIMARY KEY,
+                beer_id INTEGER NOT NULL REFERENCES list(beer_id),
+                -- user_id INTEGER NOT NULL REFERENCES user(user_id),
+                name VARCHAR,
+                rating INTEGER,
+                notes Varchar(300)
+            );
+            `)
             for(let i = 0; i < data.length; i++){
                 let {beer, volume, abv} = data[i]
                 sequelize.query(`

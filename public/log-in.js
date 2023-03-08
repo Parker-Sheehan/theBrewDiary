@@ -52,9 +52,9 @@ const createEntryCard = () =>{
             
         // grabing beer names to put into beer name selector
         res.data.forEach(item => {
-            let {name, drink_id} = item
+            let {name, beer_id} = item
             let nameOption = document.createElement('option')
-            nameOption.setAttribute('value',`${drink_id}_-_${name}`)
+            nameOption.setAttribute('value',`${beer_id}_-_${name}`)
             // nameOption.setAttribute('name',``)
             nameOption.innerHTML = (`${name}`)
             beerNameSelector.appendChild(nameOption)
@@ -143,6 +143,12 @@ const createPost = (evt) => {
     let rating = document.querySelector('#beer-rating-selector').value
     let notes = document.querySelector('#beer-notes-input').value
 
+    console.log(beerId)
     let bodyObj = {name, rating, notes, beerId}
-    console.log(bodyObj)
+
+    axios.post('/createPost', bodyObj)
+        .then(res => {
+            console.log(res.data)
+            console.log('data was seeded in the base')
+        }).catch(err => (console.log(err)))
 }

@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const {SERVER_PORT} = process.env
-const {seed, dbSorted, getNamesAndIds} = require('./controller.js')
+const {seed, dbSorted, getNamesAndIds, createPost} = require('./controller.js')
 
 const path = require('path')
 app.use(express.static('public'))
@@ -14,6 +14,7 @@ app.use(cors())
 app.post('/seed', seed)
 app.post('/dbSorted', dbSorted)
 app.get('/getNamesAndIds', getNamesAndIds)
+app.post('/createPost', createPost)
 
 
 app.get('/', (req, res) => {
