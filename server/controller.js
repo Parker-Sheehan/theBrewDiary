@@ -1,5 +1,6 @@
 require('dotenv').config()
 const {CONNECTION_STRING} = process.env
+const { query } = require('express')
 const {Builder, Capabilities, By} = require('selenium-webdriver')
 require('chromedriver')
 
@@ -15,6 +16,25 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 })
 
 module.exports = {
+    dbSorted: (req, res) => {
+        console.log(req.body)
+        let {type, direction} = req.body
+
+        sequelize.query(`
+            SELECT *
+            FROM list
+            ORDER BY(${type}) ${direction};
+        `).then(dbRes => {res.status(200).send(dbRes[0])
+        }).catch(err=> console.log(err))
+    },
+    getNamesAndIds: (req, res) => {
+        sequelize.query(`
+            SELECT *
+            FROM list
+            ORDER BY(name) ASC;
+        `).then(dbRes => {res.status(200).send(dbRes[0])
+        }).catch(err=> console.log(err))
+    },
     seed: (req, res) => {
         let count = 0
         let arr = []
@@ -79,5 +99,5 @@ module.exports = {
             }
 
         })
-    },
+    }
 }
