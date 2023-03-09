@@ -1,4 +1,3 @@
-
 const displayProfile = (userId) => {
     console.log(userId)
 
