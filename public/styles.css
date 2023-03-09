@@ -214,11 +214,16 @@ tr:nth-child(even){
 
 p{
     display: flex;
-    color: #fdfce8;
+    color: #c96e11;
 }
 
 .th-div{
     display: flex;
     flex-direction: row;
     color: #fdfce8;
+}
+
+#create-entry-toggle{
+
+    height: 35vh;
 }
