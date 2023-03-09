@@ -88,6 +88,17 @@ module.exports = {
         `).then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
+    updatePost: (req, res) => {
+        console.log(req.body)
+        let {name, rating, notes, beerId, postId} = req.body
+
+        sequelize.query(`
+            UPDATE post
+            SET beer_id = ${beerId}, name = '${name}', rating = ${rating}, notes = '${notes}'
+            WHERE post_id =  ${postId};
+        `).then(dbRes => {res.status(200).send(dbRes[0])
+        }).catch(err=> console.log(err))
+    },
     seed: (req, res) => {
         let count = 0
         let arr = []

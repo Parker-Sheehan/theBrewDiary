@@ -7,7 +7,8 @@ const
     {seed, dbSorted,
     getNamesAndIds, createPost,
     displayPost, createAccount, 
-    grabAccount, checkForAccount} = require('./controller.js')
+    grabAccount, checkForAccount,
+    updatePost} = require('./controller.js')
 
 const path = require('path')
 app.use(express.static('public'))
@@ -19,6 +20,8 @@ app.post('/seed', seed)
 app.post('/dbSorted', dbSorted)
 app.get('/getNamesAndIds', getNamesAndIds)
 app.post('/createPost', createPost)
+app.post('/updatePost', updatePost)
+
 app.put('/displayPost/:id', displayPost)
 app.post('/createAccount', createAccount)
 app.put(`/grabAccount/:id`, grabAccount)

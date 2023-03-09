@@ -1,14 +1,14 @@
 const displayProfile = (userId) => {
     console.log(userId)
-
     axios.put(`/grabAccount/${userId}`)
-        .then(res => {
-            console.log(res.data)
-            let {user_id, first} = res.data[0]
-            console.log(first)
-            console.log(userId)
-
+    .then(res => {
+        console.log(res.data)
+        let {user_id, first} = res.data[0]
+        console.log(first)
+        console.log(userId)
+        
     let main = document.querySelector('main')
+    
     main.innerHTML = ""
 
     let profileDiv = document.createElement('div')
@@ -32,17 +32,13 @@ const displayProfile = (userId) => {
     createEntryDiv.appendChild(createEntryBtn)
     profileDiv.appendChild(createEntryDiv)
     main.appendChild(profileDiv)
-        })
-        .catch(err => console.log(err))
 
-        
-        
     axios.put(`/displayPost/${userId}`)
         .then(res => {
             console.log(res.data)
             res.data.forEach(item => {
 
-                let {name, notes, rating} = item
+                let {name, notes, rating, post_id} = item
 
                 let profileDiv = document.querySelector('#profile-div')
 
@@ -106,24 +102,178 @@ const displayProfile = (userId) => {
                 beerCardBottom.setAttribute('class','beer-card-bottom')
                 let beerCardButtonDiv = document.createElement('div')
                 beerCardButtonDiv.setAttribute('class','btn-div')
-                let beerCardSubmit = document.createElement('button')
-                beerCardSubmit.setAttribute('class','card-btn')
-                beerCardSubmit.setAttribute('id','submit')
-                beerCardSubmit.setAttribute('onclick','createPost()')
-                beerCardSubmit.innerHTML = "Submit"
+                let beerCardEdit = document.createElement('button')
+                beerCardEdit.setAttribute('class','card-btn')
+                beerCardEdit.setAttribute('onclick',`editCard(${post_id}, '${name}', ${rating}, '${notes}')`)
+                beerCardEdit.innerHTML = "Edit"
 
-                beerCardButtonDiv.appendChild(beerCardSubmit)
+                let beerCardDelete = document.createElement('button')
+                beerCardDelete.setAttribute('class','card-btn')
+                beerCardDelete.setAttribute('onclick',`deleteCard(${post_id})`)
+                beerCardDelete.innerHTML = "Delete"
+
+                beerCardButtonDiv.appendChild(beerCardEdit)
+                beerCardButtonDiv.appendChild(beerCardDelete)
                 beerCardBottom.appendChild(beerCardButtonDiv)
+                beerCard.setAttribute('id',`${post_id}`)
                 beerCard.appendChild(beerCardBottom)
 
 
                 profileDiv.appendChild(beerCard)
                 // BOTTOM OF BEER CARD
+                console.log("End")
             })
 
 
         }).catch(err => (console.log(err)))
+        })
+        .catch(err => console.log(err))
+
         
+        console.log("hit")
+        
+}
+
+const editCard = (postId, postName, postRating, postNotes) => {
+
+    axios.get('/getNamesAndIds')
+    .then(res => {
+
+    
+
+    let beerCard = document.getElementById(`${postId}`)
+    beerCard.innerHTML = ('')
+
+    let beerCardTop = document.createElement('div')
+    beerCardTop.setAttribute('class','beer-card-top')
+
+    let beerNameDiv = document.createElement('div')
+    beerNameDiv.setAttribute('class', 'beer-name-div')
+
+    let beerName = document.createElement('h3')
+    beerName.innerHTML = 'Beer Name:'
+
+    let beerNameSelector = document.createElement('select')
+    beerNameSelector.setAttribute('id',"beer-name-selector")
+        
+    // grabing beer names to put into beer name selector
+    res.data.forEach(item => {
+        let {name, beer_id} = item
+        let nameOption = document.createElement('option')
+        nameOption.setAttribute('value',`${beer_id}_-_${name}`)
+        if (postName == name){
+            nameOption.setAttribute('selected',`selected`)
+        }
+        nameOption.innerHTML = (`${name}`)
+        beerNameSelector.appendChild(nameOption)
+    });
+
+
+    let beerRatingDiv = document.createElement('div')
+    beerRatingDiv.setAttribute('class','beer-rating-div')
+
+    let beerRatingTitle = document.createElement('h3')
+    beerRatingTitle.innerHTML = 'Rating:'
+
+    let beerRatingSelector = document.createElement('select')
+    beerRatingSelector.setAttribute('id','beer-rating-selector')
+
+    // for loop to create each rating option 1-5
+    for (let i = 1; i <= 5; i++){
+        let rateingOption = document.createElement('option')
+        rateingOption.setAttribute('value',`${i}`)
+        if (postRating == i){
+            rateingOption.setAttribute('selected',`selected`)
+        }
+        rateingOption.innerHTML = (`${i}`)
+        beerRatingSelector.appendChild(rateingOption)
+    }
+
+    beerNameDiv.appendChild(beerName)
+    beerNameDiv.appendChild(beerNameSelector)
+    beerCardTop.appendChild(beerNameDiv)
+    beerRatingDiv.appendChild(beerRatingTitle)
+    beerRatingDiv.appendChild(beerRatingSelector)
+    beerCardTop.appendChild(beerRatingDiv)
+    beerCard.appendChild(beerCardTop)
+
+    //Middle portion of beer card
+
+    let beerCardMiddle = document.createElement('div')
+    beerCardMiddle.setAttribute('class','beer-card-middle')
+
+    let beerNotes = document.createElement('div')
+    beerNotes.setAttribute('class','beer-notes')
+
+    let beerNotesHeader = document.createElement('div')
+    beerNotesHeader.setAttribute('class','beer-notes-header')
+
+    let beerNotesTitle = document.createElement('h4')
+    beerNotesTitle.innerHTML = 'Notes'
+
+    let beerNotesBody = document.createElement('div')
+    beerNotesBody.setAttribute('class','beer-notes-body')
+
+    let beerNotesInput = document.createElement('textarea')
+    beerNotesInput.setAttribute('id',"beer-notes-input")
+    beerNotesInput.innerHTML = `${postNotes}`
+    beerNotesInput.setAttribute('rows',"10")
+
+    beerNotesHeader.appendChild(beerNotesTitle)
+    beerNotes.appendChild(beerNotesHeader)
+    beerNotesBody.appendChild(beerNotesInput)
+    beerNotes.appendChild(beerNotesBody)
+    beerCardMiddle.appendChild(beerNotes)
+    beerCard.appendChild(beerCardMiddle)
+
+    //Bottom portion of beer card
+
+    let ID = document.querySelector('#welcome-div').className
+    console.log(ID)
+
+
+    let beerCardBottom = document.createElement('div')
+    beerCardBottom.setAttribute('class','beer-card-bottom')
+    let beerCardButtonDiv = document.createElement('div')
+    beerCardButtonDiv.setAttribute('class','btn-div')
+    let beerCardSubmit = document.createElement('button')
+    beerCardSubmit.setAttribute('class','card-btn')
+    beerCardSubmit.setAttribute('id','submit')
+    beerCardSubmit.setAttribute('onclick',`updatePost(${postId})`)
+    beerCardSubmit.innerHTML = "Submit"
+    let beerCardCancel = document.createElement('button')
+    beerCardCancel.setAttribute('class','card-btn')
+    beerCardCancel.setAttribute('id','cancel')
+    beerCardCancel.setAttribute('onclick',`displayProfile(${+ID})`)
+    beerCardCancel.innerHTML = "Cancel"
+
+    beerCardButtonDiv.appendChild(beerCardSubmit)
+    beerCardButtonDiv.appendChild(beerCardCancel)
+
+
+    beerCardBottom.appendChild(beerCardButtonDiv)
+    beerCard.appendChild(beerCardBottom)
+    })
+}
+
+const updatePost = (postId) => {
+    let name = document.querySelector('#beer-name-selector').value.split('_-_')[1]
+    let beerId = document.querySelector('#beer-name-selector').value.split('_-_')[0]
+    let rating = document.querySelector('#beer-rating-selector').value
+    let notes = document.querySelector('#beer-notes-input').value
+    if (notes.includes("'")){
+        notes = notes.replaceAll("'", "")
+    }
+
+    let bodyObj = {name, rating, notes, beerId, postId}
+
+    axios.post('/updatePost', bodyObj)
+        .then(res => {
+            let ID = document.querySelector('#welcome-div').className
+            console.log('yay')
+            console.log(+ID.className)
+            displayProfile(+ID)
+        }).catch(err => (console.log(err)))
 }
 
 const createAccount = (event) => {
@@ -261,6 +411,8 @@ const createEntryCard = () =>{
 
         //Bottom portion of beer card
 
+        let ID = document.querySelector('#welcome-div').className
+
         let beerCardBottom = document.createElement('div')
         beerCardBottom.setAttribute('class','beer-card-bottom')
         let beerCardButtonDiv = document.createElement('div')
@@ -270,8 +422,17 @@ const createEntryCard = () =>{
         beerCardSubmit.setAttribute('id','submit')
         beerCardSubmit.setAttribute('onclick','createPost()')
         beerCardSubmit.innerHTML = "Submit"
+        let beerCardCancel = document.createElement('button')
+        beerCardCancel.setAttribute('class','card-btn')
+        beerCardCancel.setAttribute('id','cancel')
+        beerCardCancel.setAttribute('onclick',`displayProfile(${+ID})`)
+        beerCardCancel.innerHTML = "Cancel"
+
 
         beerCardButtonDiv.appendChild(beerCardSubmit)
+        beerCardButtonDiv.appendChild(beerCardCancel)
+
+
         beerCardBottom.appendChild(beerCardButtonDiv)
         beerCard.appendChild(beerCardBottom)
 
@@ -280,6 +441,7 @@ const createEntryCard = () =>{
 
     })
 }
+
 
 const createPost = (evt) => {
     let name = document.querySelector('#beer-name-selector').value.split('_-_')[1]
