@@ -16,8 +16,11 @@ const sortBy = (dataType, ascOrDesc) => {
             let volumeEntry = document.createElement('td')
             let abvEntry = document.createElement('td')
             let alcoholUnitsEntry = document.createElement('td')
-            let {name, abv, oz_alcohol, rating, size} = item
+            let {name, abv, oz_alcohol, rating, size, beer_id} = item
+
             beerNameEntry.textContent = name
+            beerNameEntry.setAttribute('onClick',`getPostsByBeer(${beer_id})`)
+            beerNameEntry.setAttribute('class','beer-name')
             if (rating == null){
                 ratingEntry.textContent = "N/A"
             }else{
@@ -36,6 +39,129 @@ const sortBy = (dataType, ascOrDesc) => {
             })
         })
         .catch(err => console.log(err))
+}
+
+const getPostsByBeer = (beerId) => {
+    console.log('yay')
+    axios.put(`/getPostsByBeer/${beerId}`)
+        .then(res => {
+            let main = document.querySelector('main')
+            main.innerHTML = ''
+            let profileDiv = document.createElement('div')
+            let titleDiv = document.createElement('div')
+            let title = document.createElement('h1')
+            let backBtnDiv = document.createElement('div')
+            let backBtn = document.createElement('button')
+            profileDiv.setAttribute('id','profile-div')
+            titleDiv.setAttribute('id','welcome-div')
+            title.textContent = `${res.data[0].name}`
+            backBtnDiv.setAttribute('id','create-entry-div')
+            backBtn.innerHTML = '<- head back to list'
+            backBtn.setAttribute('onclick', "location.href='./'")
+            backBtn.setAttribute('class','back-to-list-btn')
+            console.log(backBtn)
+            backBtnDiv.appendChild(backBtn)
+            titleDiv.appendChild(title)
+            profileDiv.appendChild(backBtn)
+            profileDiv.appendChild(titleDiv)
+
+            res.data.forEach(item => {
+                let {name, notes, rating} = item
+                
+
+                // TOP OF BEER CARD
+                let beerCard = document.createElement('div')
+                beerCard.setAttribute('class','beer-card')
+
+                let beerCardTop = document.createElement('div')
+                beerCardTop.setAttribute('class','beer-card-top')
+
+                let beerNameDiv = document.createElement('div')
+                beerNameDiv.setAttribute('class', 'beer-name-div')
+
+                let beerName = document.createElement('h3')
+                beerName.innerHTML = `Beer Name: ${name}`
+
+                let beerRatingDiv = document.createElement('div')
+                beerRatingDiv.setAttribute('class','beer-rating-div')
+
+                let beerRatingTitle = document.createElement('h3')
+                beerRatingTitle.innerHTML = `Rating: ${rating}`
+
+                beerNameDiv.appendChild(beerName)
+                beerCardTop.appendChild(beerNameDiv)
+                beerRatingDiv.appendChild(beerRatingTitle)
+                beerCardTop.appendChild(beerRatingDiv)
+                beerCard.appendChild(beerCardTop)
+
+                // TOP OF BEER CARD
+
+                // MIDDLE OF BEER CARD
+                let beerCardMiddle = document.createElement('div')
+                beerCardMiddle.setAttribute('class','beer-card-middle')
+        
+                let beerNotes = document.createElement('div')
+                beerNotes.setAttribute('class','beer-notes')
+        
+                let beerNotesHeader = document.createElement('div')
+                beerNotesHeader.setAttribute('class','beer-notes-header')
+        
+                let beerNotesTitle = document.createElement('h4')
+                beerNotesTitle.innerHTML = 'Notes'
+        
+                let beerNotesBody = document.createElement('div')
+                beerNotesBody.setAttribute('class','beer-notes-body')
+        
+                let beerNotesInput = document.createElement('p')
+                beerNotesInput.innerHTML = `${notes}`
+        
+                beerNotesHeader.appendChild(beerNotesTitle)
+                beerNotes.appendChild(beerNotesHeader)
+                beerNotesBody.appendChild(beerNotesInput)
+                beerNotes.appendChild(beerNotesBody)
+                beerCardMiddle.appendChild(beerNotes)
+                beerCard.appendChild(beerCardMiddle)
+                // MIDDLE OF BEER CARD
+
+                // BOTTOM OF BEER CARD
+
+                let beerCardBottom = document.createElement('div')
+                beerCardBottom.setAttribute('class','beer-card-bottom')
+                let beerCardButtonDiv = document.createElement('div')
+                beerCardButtonDiv.setAttribute('class','btn-div')
+
+                beerCardBottom.appendChild(beerCardButtonDiv)
+                beerCard.appendChild(beerCardBottom)
+
+
+                profileDiv.appendChild(beerCard)
+                main.appendChild(profileDiv)
+            })
+
+        })
+        .catch(err => {
+            let main = document.querySelector('main')
+            main.innerHTML = ''
+            let profileDiv = document.createElement('div')
+            let titleDiv = document.createElement('div')
+            let title = document.createElement('h1')
+            let backBtnDiv = document.createElement('div')
+            let backBtn = document.createElement('button')
+            profileDiv.setAttribute('id','profile-div')
+            titleDiv.setAttribute('id','welcome-div')
+            title.textContent = `Looks like nobody has made a post yet`
+            backBtnDiv.setAttribute('id','create-entry-div')
+            backBtn.innerHTML = '<- head back to list'
+            backBtn.setAttribute('onclick', "location.href='./'")
+            backBtn.setAttribute('class','back-to-list-btn')
+            console.log(backBtn)
+            backBtnDiv.appendChild(backBtn)
+            titleDiv.appendChild(title)
+            profileDiv.appendChild(backBtn)
+            profileDiv.appendChild(titleDiv)
+
+
+        })
 }
 
 sortBy('name','ASC')

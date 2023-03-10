@@ -69,6 +69,15 @@ module.exports = {
         `).then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
+    getPostsByBeer: (req, res) => {
+        console.log('yay')
+        sequelize.query(`
+            SELECT  *
+            FROM post
+            WHERE beer_id = ${req.params.id}
+        `).then(dbRes => {res.status(200).send(dbRes[0])
+        }).catch(err=> console.log(err))
+    },
     getNamesAndIds: (req, res) => {
         sequelize.query(`
             SELECT *
@@ -97,6 +106,14 @@ module.exports = {
             SET beer_id = ${beerId}, name = '${name}', rating = ${rating}, notes = '${notes}'
             WHERE post_id =  ${postId};
         `).then(dbRes => {res.status(200).send(dbRes[0])
+        }).catch(err=> console.log(err))
+    },
+    deletePost: (req, res) => {
+        sequelize.query(`
+            DELETE FROM post
+            WHERE post_id =  ${req.params.id};
+        `)
+        .then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
     seed: (req, res) => {

@@ -32,6 +32,10 @@ button{
     cursor: pointer;
 }
 
+.beer-name{
+    cursor: pointer;
+}
+
 #logo-div{
     flex: 1;
     font-size: 2em;
@@ -226,4 +230,12 @@ p{
 #create-entry-toggle{
 
     height: 35vh;
+}
+
+.back-to-list-btn{
+    margin: 50px 0px 0px 50px;
+    border: none;
+    padding: 5px;
+    background-color: #c96e11;
+    color: #fdfce8;
 }

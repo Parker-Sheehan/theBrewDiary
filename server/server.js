@@ -8,7 +8,8 @@ const
     getNamesAndIds, createPost,
     displayPost, createAccount, 
     grabAccount, checkForAccount,
-    updatePost} = require('./controller.js')
+    updatePost, deletePost,
+    getPostsByBeer } = require('./controller.js')
 
 const path = require('path')
 app.use(express.static('public'))
@@ -21,11 +22,15 @@ app.post('/dbSorted', dbSorted)
 app.get('/getNamesAndIds', getNamesAndIds)
 app.post('/createPost', createPost)
 app.post('/updatePost', updatePost)
+app.delete('/deletePost/:id', deletePost)
+
 
 app.put('/displayPost/:id', displayPost)
 app.post('/createAccount', createAccount)
 app.put(`/grabAccount/:id`, grabAccount)
 app.post('/checkForAccount', checkForAccount)
+app.put(`/getPostsByBeer/:id`, getPostsByBeer)
+
 
 
 app.get('/', (req, res) => {

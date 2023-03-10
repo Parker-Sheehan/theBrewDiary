@@ -109,7 +109,7 @@ const displayProfile = (userId) => {
 
                 let beerCardDelete = document.createElement('button')
                 beerCardDelete.setAttribute('class','card-btn')
-                beerCardDelete.setAttribute('onclick',`deleteCard(${post_id})`)
+                beerCardDelete.setAttribute('onclick',`deletePost(${post_id})`)
                 beerCardDelete.innerHTML = "Delete"
 
                 beerCardButtonDiv.appendChild(beerCardEdit)
@@ -132,6 +132,16 @@ const displayProfile = (userId) => {
         
         console.log("hit")
         
+}
+
+const deletePost = (post) => {
+    axios.delete(`/deletePost/${post}`)
+        .then(res => {
+            let ID = document.querySelector('#welcome-div').className
+            displayProfile(+ID)
+        })
+        .catch(err => console.log(err))
+
 }
 
 const editCard = (postId, postName, postRating, postNotes) => {
