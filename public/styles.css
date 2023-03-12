@@ -33,7 +33,15 @@ button{
 }
 
 .beer-name{
+    text-decoration: underline;
+    transition: .25s;
+}
+
+.beer-name:hover{
     cursor: pointer;
+    color: red;
+    font-size: 1.1rem;
+    transform: 100%;
 }
 
 #logo-div{
@@ -89,6 +97,7 @@ button{
 }
 
 #create-entry-div{
+    display: flex;
     margin-left: 50px;
     width: 300px;
     height: 50px;
@@ -198,15 +207,18 @@ table{
     text-align: start;
     border-collapse: collapse;
     border-color: #c96e11;
+    padding: 10px;
 }
 
 th{
+    padding: 1px;
     text-align: start;
     background-color: #c96e11;
     color:#fdfce8;
 }
 
 tr{
+    padding: 100px;
     background-color: #fdfce8;
     color: #c96e11;
 }
@@ -233,9 +245,15 @@ p{
 }
 
 .back-to-list-btn{
-    margin: 50px 0px 0px 50px;
+    margin: 50px 0px 0px 30px;
     border: none;
-    padding: 5px;
     background-color: #c96e11;
     color: #fdfce8;
+    /* height: 35px; */
+    padding: 10px;
+}
+
+#back-button-div{
+    height: 75px;
+    margin-bottom: 50px;
 }

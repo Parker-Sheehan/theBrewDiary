@@ -471,6 +471,7 @@ const createPost = (evt) => {
             console.log('yay')
             console.log(+ID.className)
             displayProfile(+ID)
+            
         }).catch(err => (console.log(err)))
 }
 

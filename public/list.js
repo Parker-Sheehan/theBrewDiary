@@ -24,11 +24,11 @@ const sortBy = (dataType, ascOrDesc) => {
             if (rating == null){
                 ratingEntry.textContent = "N/A"
             }else{
-                ratingEntry.textContent = rating
+                ratingEntry.textContent = rating.toFixed(1)
             }
             volumeEntry.textContent = size
             abvEntry.textContent = abv
-            alcoholUnitsEntry.textContent = oz_alcohol
+            alcoholUnitsEntry.textContent = oz_alcohol.toFixed(2)
 
             tableItem.appendChild(beerNameEntry)
             tableItem.appendChild(ratingEntry)
@@ -52,17 +52,32 @@ const getPostsByBeer = (beerId) => {
             let title = document.createElement('h1')
             let backBtnDiv = document.createElement('div')
             let backBtn = document.createElement('button')
+            let postBtn = document.createElement('button')
             profileDiv.setAttribute('id','profile-div')
             titleDiv.setAttribute('id','welcome-div')
-            title.textContent = `${res.data[0].name}`
-            backBtnDiv.setAttribute('id','create-entry-div')
-            backBtn.innerHTML = '<- head back to list'
+            if(res.data[0] === undefined){
+                title.textContent = "No Posts Yet!"
+                console.log(title)
+            }else{
+                title.textContent = `${res.data[0].name}`
+            }
+            backBtnDiv.setAttribute('id','back-button-div')
+            backBtn.innerHTML = '<- Head back to list'
             backBtn.setAttribute('onclick', "location.href='./'")
             backBtn.setAttribute('class','back-to-list-btn')
+            if(res.data[0] === undefined){
+                postBtn.innerHTML = 'Be the first ->'
+            } else{
+                postBtn.innerHTML = 'Create new post ->'
+            }
+            postBtn.setAttribute('onclick', "location.href='./log-in'")
+            postBtn.setAttribute('class','back-to-list-btn')
             console.log(backBtn)
+            console.log(postBtn)
             backBtnDiv.appendChild(backBtn)
+            backBtnDiv.appendChild(postBtn)
             titleDiv.appendChild(title)
-            profileDiv.appendChild(backBtn)
+            profileDiv.appendChild(backBtnDiv)
             profileDiv.appendChild(titleDiv)
 
             res.data.forEach(item => {
@@ -135,33 +150,10 @@ const getPostsByBeer = (beerId) => {
 
 
                 profileDiv.appendChild(beerCard)
-                main.appendChild(profileDiv)
             })
-
+            main.appendChild(profileDiv)
         })
-        .catch(err => {
-            let main = document.querySelector('main')
-            main.innerHTML = ''
-            let profileDiv = document.createElement('div')
-            let titleDiv = document.createElement('div')
-            let title = document.createElement('h1')
-            let backBtnDiv = document.createElement('div')
-            let backBtn = document.createElement('button')
-            profileDiv.setAttribute('id','profile-div')
-            titleDiv.setAttribute('id','welcome-div')
-            title.textContent = `Looks like nobody has made a post yet`
-            backBtnDiv.setAttribute('id','create-entry-div')
-            backBtn.innerHTML = '<- head back to list'
-            backBtn.setAttribute('onclick', "location.href='./'")
-            backBtn.setAttribute('class','back-to-list-btn')
-            console.log(backBtn)
-            backBtnDiv.appendChild(backBtn)
-            titleDiv.appendChild(title)
-            profileDiv.appendChild(backBtn)
-            profileDiv.appendChild(titleDiv)
-
-
-        })
+        .catch(err => {console.log(err)})
 }
 
 sortBy('name','ASC')

@@ -94,6 +94,17 @@ module.exports = {
         sequelize.query(`
         INSERT INTO post (beer_id, user_id, name, rating, notes)
             values (${beerId}, ${userId},'${name}', ${rating}, '${notes}');
+        
+        WITH temporaryTable (averageRating, beer_id) as
+            (SELECT avg(rating), avg(beer_id)
+            FROM post
+            WHERE beer_id = ${beerId})
+            UPDATE beer_list AS b
+            SET 
+                rating = averageRating
+            FROM temporaryTable AS t
+                WHERE b.beer_id = t.beer_id;
+
         `).then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
@@ -105,6 +116,17 @@ module.exports = {
             UPDATE post
             SET beer_id = ${beerId}, name = '${name}', rating = ${rating}, notes = '${notes}'
             WHERE post_id =  ${postId};
+
+            WITH temporaryTable (averageRating, beer_id) as
+            (SELECT avg(rating), avg(beer_id)
+            FROM post
+            WHERE beer_id = ${beerId})
+            UPDATE beer_list AS b
+            SET 
+                rating = averageRating
+            FROM temporaryTable AS t
+                WHERE b.beer_id = t.beer_id;
+
         `).then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
