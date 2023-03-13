@@ -9,7 +9,7 @@ const
     displayPost, createAccount, 
     grabAccount, checkForAccount,
     updatePost, deletePost,
-    getPostsByBeer } = require('./controller.js')
+    getPostsByBeer, createFakePosts} = require('./controller.js')
 
 const path = require('path')
 app.use(express.static('public'))
@@ -18,6 +18,7 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/seed', seed)
+app.post('/createFakePosts',createFakePosts)
 app.post('/dbSorted', dbSorted)
 app.get('/getNamesAndIds', getNamesAndIds)
 app.post('/createPost', createPost)

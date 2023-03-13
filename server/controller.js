@@ -138,6 +138,49 @@ module.exports = {
         .then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
+    createFakePosts: (req, res) => {
+        sequelize.query(`
+        SELECT name, beer_id
+        FROM beer_list
+        ORDER BY(beer_id) ASC;
+        `).then(dbRes => {
+            let count = 0
+            let notesArray = ["Umm this beer is a little silly", "Notes of lawn clipings", "A little on the heavy side",
+                            "Wish it was a little hoppier", "This one is perfect", "Flavorless!!", "Great drink", "Perfect summer beer",
+                            "Nice", "Cool", "Neat", "Funky", "Too sweet", "Nice sweetness","Taste like coffee"]
+            for (let i = 0; i < 150; i++){
+                let idAndNameNum = Math.floor(Math.random()* 79)
+                let name = dbRes[0][idAndNameNum].name
+                let beer_id = dbRes[0][idAndNameNum].beer_id
+                let user_id = Math.ceil(Math.random()* 13)
+                let rating = Math.ceil(Math.random()* 5)
+                let notes = notesArray[Math.floor(Math.random()* notesArray.length)]
+
+                sequelize.query(`
+                INSERT INTO post (beer_id, user_id, name, rating, notes)
+                    values (${beer_id}, ${user_id},'${name}', ${rating}, '${notes}');
+
+                    WITH temporaryTable (averageRating, beer_id) as
+                    (SELECT avg(rating), avg(beer_id)
+                    FROM post
+                    WHERE beer_id = ${beer_id})
+                    UPDATE beer_list AS b
+                    SET 
+                        rating = averageRating
+                    FROM temporaryTable AS t
+                    WHERE b.beer_id = t.beer_id;
+
+                `)
+            }
+            })
+        // for(let i=0; i<150; i++){
+
+            // sequelize.query(`
+            // INSERT INTO post (beer_id, user_id, name, rating, notes)
+            //     values (${beerId}, ${userId},'${name}', ${rating}, '${notes}');
+            // `)
+        // }
+    },
     seed: (req, res) => {
         let count = 0
         let arr = []
@@ -195,16 +238,6 @@ module.exports = {
                 abv FLOAT,
                 oz_alcohol FLOAT
             );
-            `)
-            for(let i = 0; i < data.length; i++){
-                let {beer, volume, abv} = data[i]
-                sequelize.query(`
-                INSERT INTO beer_list(name, size, abv, oz_alcohol)
-                    values ('${beer}', ${volume}, ${abv}, ${volume*(abv/100)});
-                    `)
-            }
-
-            sequelize.query(`
 
             CREATE TABLE user_list(
                 user_id SERIAL PRIMARY KEY,
@@ -222,6 +255,16 @@ module.exports = {
                 rating INTEGER,
                 notes Varchar(300)
             );
+            `)
+            for(let i = 0; i < data.length; i++){
+                let {beer, volume, abv} = data[i]
+                sequelize.query(`
+                INSERT INTO beer_list(name, size, abv, oz_alcohol)
+                    values ('${beer}', ${volume}, ${abv}, ${volume*(abv/100)});
+                    `)
+            }
+
+            sequelize.query(`
             `)
 
         })

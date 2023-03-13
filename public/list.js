@@ -6,6 +6,52 @@ const sortBy = (dataType, ascOrDesc) => {
     console.log('yaya')
     axios.post('/dbSorted',bodyObj)
         .then(res => {
+            const main = document.querySelector('main')
+            main.innerHTML = `
+            <div id="table-div">
+                <table>
+                    <thead>
+                        <th>
+                            <div class="th-div">
+                                Beer Name
+                                <button onclick="sortBy('name', 'ASC')">^</button>
+                                <button onclick="sortBy('name', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+    
+                        <th>
+                            <div class="th-div">
+                                Rating
+                                <button onclick="sortBy('rating', 'ASC')">^</button>
+                                <button onclick="sortBy('rating', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-div">
+                                Volume
+                                <button onclick="sortBy('size', 'ASC')">^</button>
+                                <button onclick="sortBy('size', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-div">
+                                Abv
+                                <button onclick="sortBy('abv', 'ASC')">^</button>
+                                <button onclick="sortBy('abv', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-div">
+                                Alcohol Units
+                                <button onclick="sortBy('oz_alcohol', 'ASC')">^</button>
+                                <button onclick="sortBy('oz_alcohol', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>`
             let tableBody = document.querySelector('tbody')
             tableBody.innerHTML = ""
             
@@ -63,7 +109,7 @@ const getPostsByBeer = (beerId) => {
             }
             backBtnDiv.setAttribute('id','back-button-div')
             backBtn.innerHTML = '<- Head back to list'
-            backBtn.setAttribute('onclick', "location.href='./'")
+            backBtn.setAttribute('onclick', "sortBy('name', 'ASC')")
             backBtn.setAttribute('class','back-to-list-btn')
             if(res.data[0] === undefined){
                 postBtn.innerHTML = 'Be the first ->'

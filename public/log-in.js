@@ -297,14 +297,24 @@ const createAccount = (event) => {
 
 
     if (signUpFirst !== '' && signUpLast  !== '' && signUpUser !== '' && signUpPassword !== '' && signUpPasswordConfirm !== '' && signUpPassword === signUpPasswordConfirm){
-        let bodyObj = {signUpFirst, signUpLast, signUpUser, signUpPassword}
-        axios.post('/createAccount', bodyObj)
+        let bodyObj1 = {signUpFirst, signUpLast, signUpUser, signUpPassword}
+        let bodyObj2 = {logInUser : signUpUser, logInPassword : signUpPassword}
+        axios.post('/checkForAccount', bodyObj2)
+        .then(res=> {
+            let userId = res.data[0]
+            if (userId == undefined){
+            axios.post('/createAccount', bodyObj1)
             .then(res=> {
                 let userId = res.data[0].user_id
                 displayProfile(userId)
-
             })
-            .catch(err => (console.log(err)))
+            .catch(err => (console.log(err)))}
+            else{
+                alert("Username and password combination already exists")
+            }
+        })
+
+        
     }else{
         alert("something is a little off")
     }
