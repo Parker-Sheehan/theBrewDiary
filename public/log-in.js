@@ -475,6 +475,31 @@ const createPost = (evt) => {
         }).catch(err => (console.log(err)))
 }
 
+const createBubble = () => {
+    for(let i = 0; i < 40; i++){
+        let newBubble = document.createElement('div')
+        newBubble.setAttribute('class','bubbles')
+        newBubble.setAttribute('id',`bubble${i}`)
+        container.appendChild(newBubble)
+        let size = Math.floor((Math.random()*20)) + 5
+        let speed = (Math.random()*3) +1.5
+        let position = (Math.random()*100)
+        let opacity = Math.random()
+
+
+        document.getElementById(`bubble${i}`).style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        animation: rise ${speed}s linear infinite;
+        left: ${position}vw;
+        opacity: ${opacity};
+        animation-delay: ${opacity * 2.2}s;
+        `
+    }
+}
+
+createBubble()
+
 
 document.querySelector('#sign-in-btn').addEventListener('click', createAccount)
 document.querySelector('#log-in-btn').addEventListener('click', login)

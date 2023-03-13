@@ -26,6 +26,7 @@ main{
     margin-top: 10vh;
     display: flex;
     justify-content: space-around;
+    /* justify-content: center; */
 }
 
 button{
@@ -257,3 +258,30 @@ p{
     height: 75px;
     margin-bottom: 50px;
 }
+
+#container{
+    overflow: hidden;
+    position: fixed;
+    top: 0vh; 
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+
+}
+
+.bubbles{
+    position: absolute;
+    background-color: #fdfce8;
+    border-radius: 50%;
+    overflow: hidden;
+    top: 100vh;
+}
+
+
+@keyframes rise {
+    25% { transform: translateX(-6px) translateY(-25vh);}
+    50% { transform: translateX(6px) translateY(-50vh);}
+    75% { transform: translateX(-6px) translateY(-75vh);}
+    100% { transform: translateY(-100vh);} 
+  }
