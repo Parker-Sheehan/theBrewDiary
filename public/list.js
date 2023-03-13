@@ -179,6 +179,7 @@ const createBubble = () => {
     }
 }
 
-createBubble()
 
 sortBy('name','ASC')
+createBubble()
+
