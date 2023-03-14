@@ -5,9 +5,6 @@
 
 }
 
-/* fae96f */
-/* f6c100 */
-/* c96e11 */
 
 nav{
     background-color: #fdfce8;
@@ -25,8 +22,8 @@ body{
 main{
     margin-top: 10vh;
     display: flex;
-    justify-content: space-around;
-    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 a{
@@ -46,15 +43,12 @@ button{
 
 .beer-name:hover{
     cursor: pointer;
-    color: red;
-    font-size: 1.1rem;
-    transform: 100%;
+    color: black;
 }
 
 #logo-div{
     flex: 1;
     font-size: 2em;
-    /* margin-right: 200px; */
     margin-left: 50px;
 
 }
@@ -62,7 +56,7 @@ button{
 #link-div{
     flex: 2;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .log-in-card{
@@ -71,9 +65,10 @@ button{
     justify-content: center;
     align-items: center;
     background-color: #fdfce8;
-    height: 60vh;
-    width: 30vw;
+    height: 55vh;
+    width: 25vw;
     margin-top: 10vh;
+    border-radius: 10px;
 }
 
 .form-div{
@@ -94,20 +89,32 @@ button{
 }
 
 #profile-div{
-    width: 100vw;
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    padding-bottom: 50px;
+    width: 60vw;
+    background-color: #fdfce882;
+    border: #c96e11 1px solid;
+    border-radius: 15px;
+    /* flex: 1; */
 }
 
 #welcome-div{
-    margin: 20px;
-    margin-left: 50px;
+    margin: 50px;
+    margin-bottom: 0px;
+    background-color: #fdfce8;
+    padding: 25px;
+    border: #c96e11 solid 1px;
+    border-radius: 5px;
 }
 
 #create-entry-div{
     display: flex;
-    margin-left: 50px;
     width: 300px;
     height: 50px;
+    margin-top: 50px;
 }
 
 #create-entry-btn{
@@ -115,10 +122,13 @@ button{
     height: 50px;
     font-size: 2em;
     background-color: #fdfce8;
+    border: #c96e11 1px solid;
+    border-radius: 5px;
 }
 
 .beer-card{
     margin: 50px;
+    margin-bottom: 0px;
     height: 35vh;
     width: 40vw;
     border: 1px solid #c96e11;
@@ -127,6 +137,10 @@ button{
     flex-direction: column;
     background-color: #fdfce8;
 
+}
+
+.beer-card:first-of-type{
+    margin-top: 0px;
 }
 
 .beer-card-top{
@@ -144,6 +158,10 @@ button{
     margin-left: 5px;
     flex: 1;
     border-right:#c96e11 1px solid;
+}
+
+select{
+    margin: 0px 5px 0px 5px;
 }
 
 .beer-rating-div{
@@ -201,6 +219,7 @@ button{
 }
 
 #beer-notes-input{
+    background-color: transparent;
     border: 0 none;
     margin: 0;
     outline: 0 none;
@@ -211,20 +230,21 @@ button{
   }
 
 #table-div{
+    display: flex;
+    justify-content: center;
+    width: 60vw;
     margin: 50px;
-    flex: 1;
 }
 
 table{
-    width: 60%;
     text-align: start;
     border-collapse: collapse;
     border-color: #c96e11;
-    padding: 10px;
+    border: #c96e11 1px solid;
 }
 
 th{
-    padding: 1px;
+    padding: 3px;
     text-align: start;
     background-color: #c96e11;
     color:#fdfce8;
@@ -234,6 +254,11 @@ tr{
     padding: 100px;
     background-color: #fdfce8;
     color: #c96e11;
+}
+
+td{
+    font-size: 1.1em;
+    padding: 3px;
 }
 
 tr:nth-child(even){
@@ -253,22 +278,27 @@ p{
 }
 
 #create-entry-toggle{
-
     height: 35vh;
+    margin-top: 50px;
 }
 
 .back-to-list-btn{
-    margin: 50px 0px 0px 30px;
     border: none;
     background-color: #c96e11;
     color: #fdfce8;
-    /* height: 35px; */
+    height: 35px;
     padding: 10px;
+    margin: 10px;
 }
 
 #back-button-div{
-    height: 75px;
-    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    border: #c96e11 1px solid;
+    border-radius: 5px;
+    padding: 50px;
+    background-color: #fdfce8;
 }
 
 #container{
@@ -279,7 +309,6 @@ p{
     width: 100vw;
     height: 100vh;
     z-index: -1;
-
 }
 
 .bubbles{
@@ -289,7 +318,6 @@ p{
     overflow: hidden;
     top: 100vh;
 }
-
 
 @keyframes rise {
     25% { transform: translateX(-6px) translateY(-25vh);}

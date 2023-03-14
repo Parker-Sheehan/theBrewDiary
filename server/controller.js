@@ -75,6 +75,7 @@ module.exports = {
             SELECT  *
             FROM post
             WHERE beer_id = ${req.params.id}
+            ORDER BY(post_id) DESC
         `).then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
     },
