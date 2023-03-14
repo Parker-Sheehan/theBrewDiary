@@ -28,7 +28,7 @@ const sortBy = (dataType, ascOrDesc) => {
                         </th>
                         <th>
                             <div class="th-div">
-                                Volume
+                                Volume (oz)
                                 <button onclick="sortBy('size', 'ASC')">^</button>
                                 <button onclick="sortBy('size', 'DESC')">⌄</button>
                             </div>
@@ -42,7 +42,7 @@ const sortBy = (dataType, ascOrDesc) => {
                         </th>
                         <th>
                             <div class="th-div">
-                                Alcohol Units
+                                Alcohol Units (oz)
                                 <button onclick="sortBy('oz_alcohol', 'ASC')">^</button>
                                 <button onclick="sortBy('oz_alcohol', 'DESC')">⌄</button>
                             </div>
