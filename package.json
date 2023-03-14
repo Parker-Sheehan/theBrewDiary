@@ -1,5 +1,6 @@
 {
   "name": "gingerManScrape",
+  "main": "server/server.js",
   "jest": {
     "testEnvironment": "node",
     "testTimeout": 30000
