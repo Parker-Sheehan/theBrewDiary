@@ -1,91 +1,3 @@
-const sortBy = (dataType, ascOrDesc) => {
-    let bodyObj = {
-        type : `${dataType}`,
-        direction : `${ascOrDesc}`
-    }
-    console.log('yaya')
-    axios.post('/dbSorted',bodyObj)
-        .then(res => {
-            const main = document.querySelector('main')
-            main.innerHTML = `
-            <div id="table-div">
-                <table>
-                    <thead>
-                        <th>
-                            <div class="th-div">
-                                Beer Name
-                                <button onclick="sortBy('name', 'ASC')">^</button>
-                                <button onclick="sortBy('name', 'DESC')">⌄</button>
-                            </div>
-                        </th>
-    
-                        <th>
-                            <div class="th-div">
-                                Rating
-                                <button onclick="sortBy('rating', 'ASC')">^</button>
-                                <button onclick="sortBy('rating', 'DESC')">⌄</button>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="th-div">
-                                Volume (oz)
-                                <button onclick="sortBy('size', 'ASC')">^</button>
-                                <button onclick="sortBy('size', 'DESC')">⌄</button>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="th-div">
-                                Abv
-                                <button onclick="sortBy('abv', 'ASC')">^</button>
-                                <button onclick="sortBy('abv', 'DESC')">⌄</button>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="th-div">
-                                Alcohol Units (oz)
-                                <button onclick="sortBy('oz_alcohol', 'ASC')">^</button>
-                                <button onclick="sortBy('oz_alcohol', 'DESC')">⌄</button>
-                            </div>
-                        </th>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>`
-            let tableBody = document.querySelector('tbody')
-            tableBody.innerHTML = ""
-            
-            res.data.forEach(item => {
-            let tableItem = document.createElement('tr')
-            let beerNameEntry = document.createElement('td')
-            let ratingEntry = document.createElement('td')
-            let volumeEntry = document.createElement('td')
-            let abvEntry = document.createElement('td')
-            let alcoholUnitsEntry = document.createElement('td')
-            let {name, abv, oz_alcohol, rating, size, beer_id} = item
-
-            beerNameEntry.textContent = name
-            beerNameEntry.setAttribute('onClick',`getPostsByBeer(${beer_id})`)
-            beerNameEntry.setAttribute('class','beer-name')
-            if (rating == null){
-                ratingEntry.textContent = "N/A"
-            }else{
-                ratingEntry.textContent = rating.toFixed(1)
-            }
-            volumeEntry.textContent = size
-            abvEntry.textContent = abv
-            alcoholUnitsEntry.textContent = oz_alcohol.toFixed(2)
-
-            tableItem.appendChild(beerNameEntry)
-            tableItem.appendChild(ratingEntry)
-            tableItem.appendChild(volumeEntry)
-            tableItem.appendChild(abvEntry)
-            tableItem.appendChild(alcoholUnitsEntry)
-            tableBody.appendChild(tableItem)
-            })
-        })
-        .catch(err => console.log(err))
-}
 
 const getPostsByBeer = (beerId) => {
     console.log('yay')
@@ -200,6 +112,95 @@ const getPostsByBeer = (beerId) => {
             main.appendChild(profileDiv)
         })
         .catch(err => {console.log(err)})
+}
+
+const sortBy = (dataType, ascOrDesc) => {
+    let bodyObj = {
+        type : `${dataType}`,
+        direction : `${ascOrDesc}`
+    }
+    console.log('yaya')
+    axios.post('/dbSorted',bodyObj)
+        .then(res => {
+            const main = document.querySelector('main')
+            main.innerHTML = `
+            <div id="table-div">
+                <table>
+                    <thead>
+                        <th>
+                            <div class="th-div">
+                                Beer Name
+                                <button onclick="sortBy('name', 'ASC')">^</button>
+                                <button onclick="sortBy('name', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+    
+                        <th>
+                            <div class="th-div">
+                                Rating
+                                <button onclick="sortBy('rating', 'ASC')">^</button>
+                                <button onclick="sortBy('rating', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-div">
+                                Volume (oz)
+                                <button onclick="sortBy('size', 'ASC')">^</button>
+                                <button onclick="sortBy('size', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-div">
+                                Abv
+                                <button onclick="sortBy('abv', 'ASC')">^</button>
+                                <button onclick="sortBy('abv', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-div">
+                                Alcohol Units (oz)
+                                <button onclick="sortBy('oz_alcohol', 'ASC')">^</button>
+                                <button onclick="sortBy('oz_alcohol', 'DESC')">⌄</button>
+                            </div>
+                        </th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>`
+            let tableBody = document.querySelector('tbody')
+            tableBody.innerHTML = ""
+            
+            res.data.forEach(item => {
+            let tableItem = document.createElement('tr')
+            let beerNameEntry = document.createElement('td')
+            let ratingEntry = document.createElement('td')
+            let volumeEntry = document.createElement('td')
+            let abvEntry = document.createElement('td')
+            let alcoholUnitsEntry = document.createElement('td')
+            let {name, abv, oz_alcohol, rating, size, beer_id} = item
+
+            beerNameEntry.textContent = name
+            beerNameEntry.setAttribute('onClick',`getPostsByBeer(${beer_id})`)
+            beerNameEntry.setAttribute('class','beer-name')
+            if (rating == null){
+                ratingEntry.textContent = "N/A"
+            }else{
+                ratingEntry.textContent = rating.toFixed(1)
+            }
+            volumeEntry.textContent = size
+            abvEntry.textContent = abv
+            alcoholUnitsEntry.textContent = oz_alcohol.toFixed(2)
+
+            tableItem.appendChild(beerNameEntry)
+            tableItem.appendChild(ratingEntry)
+            tableItem.appendChild(volumeEntry)
+            tableItem.appendChild(abvEntry)
+            tableItem.appendChild(alcoholUnitsEntry)
+            tableBody.appendChild(tableItem)
+            })
+        })
+        .catch(err => console.log(err))
 }
 
 const createBubble = () => {
