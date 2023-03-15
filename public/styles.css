@@ -277,6 +277,15 @@ p{
     color: #fdfce8;
 }
 
+.th-div > button{
+    margin-left: 4px;
+    padding: 2px;
+    background-color: #c96e11;
+    color: #fdfce8;
+    border: solid 1px #fdfce8;
+    /* box-shadow: 1px 1px 1px #fce9d3; */
+}
+
 #create-entry-toggle{
     height: 35vh;
     margin-top: 50px;

@@ -313,8 +313,6 @@ const createAccount = (event) => {
                 alert("Username and password combination already exists")
             }
         })
-
-        
     }else{
         alert("something is a little off")
     }
@@ -332,9 +330,7 @@ const login = (event) =>{
         .then(res=> {
             let userId = res.data[0].user_id
             displayProfile(userId)
-        })
-    
-    
+        })   
 }
 
 const createEntryCard = () =>{
@@ -342,15 +338,12 @@ const createEntryCard = () =>{
     axios.get('/getNamesAndIds')
         .then(res => {
 
-        
-
         let entryBtn = document.querySelector('#create-entry-div')
         entryBtn.setAttribute('id', 'create-entry-toggle')
         entryBtn.innerHTML = ('')
 
         let beerCard = document.createElement('div')
         beerCard.setAttribute('class','beer-card')
-
 
         let beerCardTop = document.createElement('div')
         beerCardTop.setAttribute('class','beer-card-top')

@@ -133,8 +133,25 @@ module.exports = {
     },
     deletePost: (req, res) => {
         sequelize.query(`
+
+            UPDATE post
+            SET  rating = NULL
+            WHERE post_id =  ${req.params.id};
+
+            WITH temporaryTable (averageRating, beer_id) as
+            (SELECT avg(rating), avg(beer_id)
+            FROM post
+            WHERE post_id = ${req.params.id})
+            UPDATE beer_list AS b
+            SET 
+                rating = averageRating
+            FROM temporaryTable AS t
+                WHERE b.beer_id = t.beer_id;
+
             DELETE FROM post
             WHERE post_id =  ${req.params.id};
+
+            
         `)
         .then(dbRes => {res.status(200).send(dbRes[0])
         }).catch(err=> console.log(err))
