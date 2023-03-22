@@ -7,6 +7,7 @@ This is the first web app I have created, I made it using
 -html
 -js
 -css
+-sql
 -node
 -express
 -cors
