@@ -4,6 +4,8 @@
 -----------------
 
 This is the first web app I have created, I made it using 
+
+
 *html
 *js
 *css
@@ -13,6 +15,8 @@ This is the first web app I have created, I made it using
 *cors
 *selenium
 *chrome driver
+
+
 
 My goal was to create a website that I could use easily manipulate the data of all the beers
 from a local bar, I gathered all the information by scraping it from the website of said bar
